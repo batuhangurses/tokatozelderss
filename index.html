@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tokatozelders | Tokat'ta Öğrenciden Öğrenciye Özel Ders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:#0066ff;
+      --secondary:#f5f7ff;
+      --dark:#1f1f1f;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+    body{line-height:1.6;color:var(--dark);}
+    header{background:var(--secondary);padding:1rem 2rem;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;}
+    header h1{font-size:1.5rem;color:var(--primary);}
+    nav ul{display:flex;gap:1rem;list-style:none;}
+    nav a{text-decoration:none;color:var(--dark);font-weight:600;}
+    nav a:hover{color:var(--primary);}
+    section{padding:4rem 2rem;max-width:1100px;margin:auto;}
+    .hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;}
+    .hero h2{font-size:2.5rem;color:var(--primary);}
+    .hero p{max-width:700px;}
+    .btn{display:inline-block;background:var(--primary);color:white;padding:.8rem 1.6rem;border-radius:6px;margin-top:1rem;text-decoration:none;font-weight:600;}
+    .btn:hover{opacity:.9;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem;}
+    .card{background:white;border:1px solid #e5e8ff;border-radius:12px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.05);display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.5rem;}
+    .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:1rem;}
+    .pricing{background:var(--secondary);}
+    .pricing h3{margin-bottom:1rem;}
+    footer{background:#0e0e0e;color:white;padding:2rem;text-align:center;}
+    @media(min-width:768px){
+      .hero{flex-direction:row;text-align:left;justify-content:space-between;}
+      .hero img{width:45%;}
+      .hero-content{max-width:50%;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>tokatozelders</h1>
+  <nav>
+    <ul>
+      <li><a href="#hakkinda">Hakkında</a></li>
+      <li><a href="#dersler">Dersler</a></li>
+      <li><a href="#ogretmenler">Öğrenciler</a></li>
+      <li><a href="#ucret">Ücretler</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Tokat'ta Öğrenciden Öğrenciye Özel Ders</h2>
+    <p>Üniversiteli ve lise son sınıf öğrencilerinden oluşan dinamik ekibimizle; ilkokuldan liseye kadar tüm derslerde <strong>tamamen öğrenci dostu</strong> bir yaklaşım sunuyoruz.</p>
+    <a href="#iletisim" class="btn">Hemen İletişime Geç</a>
+  </div>
+  <img src="https://source.unsplash.com/600x400?study" alt="Öğrenci görseli">
+</section>
+
+<section id="hakkinda">
+  <h2>Biz Kimiz?</h2>
+  <p>tokatozelders, Tokat içinde faaliyet gösteren ve tamamı öğrencilerden oluşan bir özel ders topluluğudur. <br>
+  Öğrencilerin güncel müfredat ve sınav sistemine hâkim olması, konuları akran diliyle anlatabilmesi en büyük avantajımız.</p>
+</section>
+
+<section id="dersler">
+  <h2>Dersler & Hizmetler</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Matematik</h3>
+      <p>Temelden TYT/AYT düzeyine kadar.</p>
+    </div>
+    <div class="card">
+      <h3>Fizik</h3>
+      <p>Görsel ve deney temelli anlatım.</p>
+    </div>
+    <div class="card">
+      <h3>Kimya</h3>
+      <p>Kolay ezber teknikleriyle kimya artık korkulu rüya değil.</p>
+    </div>
+    <div class="card">
+      <h3>İngilizce</h3>
+      <p>Konuşma pratiği + sınav odaklı gramer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ogretmenler">
+  <h2>Ekipte Kimler Var?</h2>
+  <p>Aşağıdaki arkadaşlarımızdan ders alabilirsiniz. Her biri alanında başarılı, iletişimi güçlü.</p>
+  <div class="cards">
+    <div class="card">
+      <img src="https://source.unsplash.com/120x120?student" alt="Öğrenci 1">
+      <h3>Ayşe Y.</h3>
+      <p>Boğaziçi Üni. <br> Matematik 3. sınıf</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/120x120?girl" alt="Öğrenci 2">
+      <h3>Mehmet T.</h3>
+      <p>İTÜ <br> Fizik Müh. 2. sınıf</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/120x120?boy" alt="Öğrenci 3">
+      <h3>Selin K.</h3>
+      <p>Hacettepe <br> Kimya 4. sınıf</p>
+    </div>
+    <div class="card">
+      <img src="https://source.unsplash.com/120x120?face" alt="Öğrenci 4">
+      <h3>Can D.</h3>
+      <p>Bilkent <br> İngilizce Öğr. 3. sınıf</p>
+    </div>
+  </div>
+</section>
+
+<section id="ucret" class="pricing">
+  <h2>Ücretler & Kampanya</h2>
+  <h3>Tek Ders (1 saat) &nbsp; — &nbsp; 300₺</h3>
+  <h3>Haftada 2 Ders (paket) &nbsp; — &nbsp; 550₺</h3>
+  <p><strong>Kampanya:</strong> Haftada 2 ders alan öğrencilerimize <em>ücretsiz koçluk</em> (hedef planlama + haftalık takip) hediyemizdir.</p>
+</section>
+
+<section id="iletisim">
+  <h2>İletişim</h2>
+  <p>Ders talebi veya soruların için bize ulaş:</p>
+  <div class="cards">
+    <div class="card">
+      <h3>WhatsApp</h3>
+      <p><a href="https://wa.me/905555555555">+90 555 555 55 55</a></p>
+    </div>
+    <div class="card">
+      <h3>E‑posta</h3>
+      <p><a href="mailto:info@tokatozelders.com">info@tokatozelders.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  tokatozelders © 2025 — Tokat
+</footer>
+
+<script>
+// Nav link smooth scroll
+document.querySelectorAll('nav a').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+
+</body>
+</html>
 
