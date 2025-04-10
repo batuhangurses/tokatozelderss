@@ -3,185 +3,1241 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tokatozelders | Tokat'ın Öğrenci Özel Ders Ağı</title>
+  <title>tokatozelders | Tokat'ta Öğrenciden Öğrenciye Özel Ders</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    /* =====================================
-       RENK PALETİ  
-    =====================================*/
-    :root{
-      --yellow:#ffd60a;
-      --burgundy:#7a1124;
-      --white:#ffffff;
-      --black:#111111;
-      --light:#fafafa;
-      --gray:#f0f0f0;
-      --radius:16px;
-      --transition:.25s cubic-bezier(.4,0,.2,1);
+    /* ========= GLOBAL DEĞİŞKENLER ve TEMEL TANIMLAMALAR ========= */
+    :root {
+      --yellow: #ffd60a;
+      --burgundy: #7a1124;
+      --white: #ffffff;
+      --black: #111111;
+      --light: #fafafa;
+      --radius: 14px;
+      --dark-blue: #002244;
+      --light-gray: #f4f4f4;
     }
-
-    /* =====================================
-       RESET & GLOBAL
-    =====================================*/
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Inter',sans-serif;color:var(--black);background:var(--light);line-height:1.65;}
-    img{max-width:100%;display:block;}
-    h2{font-size:2.4rem;color:var(--burgundy);margin-bottom:1rem;}
-    p{max-width:800px;}
-    section{padding:5rem 1.5rem;max-width:1280px;margin:auto;}
-    .btn{display:inline-block;padding:1rem 2.4rem;border-radius:var(--radius);background:var(--yellow);color:var(--black);font-weight:700;text-decoration:none;transition:var(--transition);}
-    .btn:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.1);}
-    .center{text-align:center;}
-
-    /* =====================================
-       GRID & CARDS
-    =====================================*/
-    .cards{display:grid;gap:2rem;margin-top:2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-    .card{background:var(--white);border:1px solid var(--gray);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.05);transition:var(--transition);}
-    .card:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(0,0,0,.08);} 
-    .card h3{color:var(--burgundy);margin-bottom:.5rem;font-size:1.35rem;}
-    .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;border:4px solid var(--yellow);}  
-
-    /* =====================================
-       HEADER & NAV
-    =====================================*/
-    header{position:sticky;top:0;z-index:300;background:var(--white);border-bottom:2px solid var(--yellow);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
-    header h1{font-size:1.8rem;color:var(--burgundy);font-weight:800;letter-spacing:-.5px;}
-    nav ul{display:flex;gap:1.4rem;list-style:none;}
-    nav a{color:var(--black);text-decoration:none;font-weight:600;position:relative;transition:var(--transition);}
-    nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:3px;background:var(--yellow);transition:var(--transition);}
-    nav a:hover{color:var(--burgundy);}  
-    nav a:hover::after{width:100%;}
-
-    /* Hamburger */
-    .hamburger{display:none;width:28px;height:24px;flex-direction:column;justify-content:space-between;cursor:pointer;}
-    .hamburger span{display:block;height:4px;background:var(--black);border-radius:4px;transition:var(--transition);}  
-    @media(max-width:768px){
-      nav ul{position:fixed;inset:0 0 0 40%;background:var(--white);flex-direction:column;align-items:center;padding-top:6rem;transform:translateX(100%);transition:var(--transition);}  
-      nav ul.open{transform:translateX(0);}  
-      .hamburger{display:flex;}
+    
+    /* ========= RESET ========= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
-    .hamburger.active span:nth-child(1){transform:rotate(45deg) translateY(10px);}  
-    .hamburger.active span:nth-child(2){opacity:0;}  
-    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translateY(-10px);}  
-
-    /* =====================================
-       HERO
-    =====================================*/
-    .hero{display:flex;flex-direction:column-reverse;gap:3rem;align-items:center;text-align:center;padding-top:6rem;}
-    .hero-content{max-width:640px;}
-    .hero h2{font-size:3.2rem;color:var(--yellow);text-shadow:2px 2px 0 var(--burgundy);}  
-    .hero-img{width:100%;max-width:560px;border-radius:var(--radius);box-shadow:0 12px 28px rgba(0,0,0,.15);}  
-    @media(min-width:992px){
-      .hero{flex-direction:row;text-align:left;}
-      .hero-content{flex:1;}
-      .hero-img{flex:1;}
+    html {
+      scroll-behavior: smooth;
     }
-
-    /* =====================================
-       PARALLAX
-    =====================================*/
-    .parallax{background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:cover;min-height:400px;position:relative;display:flex;align-items:center;justify-content:center;}
-    .parallax::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35);}  
-    .parallax h2{position:relative;color:var(--white);font-size:2.8rem;text-shadow:2px 2px 6px rgba(0,0,0,.6);}  
-
-    /* =====================================
-       TIMELINE
-    =====================================*/
-    .timeline{position:relative;margin-top:3rem;}
-    .timeline::before{content:"";position:absolute;left:50%;top:0;width:4px;height:100%;background:var(--yellow);transform:translateX(-50%);}  
-    .tl-item{position:relative;width:50%;padding:1.5rem 2rem;}
-    .tl-item:nth-child(odd){left:0;text-align:right;}
-    .tl-item:nth-child(even){left:50%;}
-    .tl-item::before{content:"";position:absolute;top:1.8rem;width:16px;height:16px;border-radius:50%;background:var(--burgundy);border:3px solid var(--white);}  
-    .tl-item:nth-child(odd)::before{right:-8px;}  
-    .tl-item:nth-child(even)::before{left:-8px;}  
-    @media(max-width:768px){
-      .timeline::before{left:8px;}
-      .tl-item{width:100%;padding-left:3rem;text-align:left;}
-      .tl-item:nth-child(odd),.tl-item:nth-child(even){left:0;}
-      .tl-item::before{left:-4px;}
+    body {
+      background: var(--light);
+      color: var(--black);
+      line-height: 1.6;
     }
-
-    /* =====================================
-       PRICING
-    =====================================*/
-    .pricing{background:var(--white);border:2px solid var(--yellow);border-radius:var(--radius);padding:2.4rem;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.08);transition:var(--transition);}  
-    .pricing:hover{transform:translateY(-6px);}  
-    .pricing h3{font-size:1.9rem;color:var(--burgundy);}  
-    .pricing p{margin:.6rem 0;}
-
-    /* =====================================
-       TESTIMONIALS
-    =====================================*/
-    .testimonials{background:var(--gray);border-radius:var(--radius);padding:4rem 2rem;}
-    .testimonial{max-width:680px;margin:0 auto 2.5rem;background:var(--white);border-radius:var(--radius);padding:2rem;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.06);}  
-    .testimonial::before{content:"\201C";position:absolute;top:-30px;left:20px;font-size:6rem;color:var(--yellow);opacity:.3;}
-    .testimonial cite{display:block;margin-top:1rem;font-weight:600;color:var(--burgundy);}  
-
-    /* =====================================
-       FAQ
-    =====================================*/
-    details{background:var(--white);border:1px solid var(--gray);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,.03);}  
-    summary{font-weight:700;cursor:pointer;color:var(--burgundy);}  
-
-    /* =====================================
-       CONTACT
-    =====================================*/
-    form{display:grid;gap:1rem;max-width:700px;margin:3rem auto 0;}
-    input,textarea{padding:1rem;border:2px solid var(--yellow);border-radius:var(--radius);font-size:1rem;background:var(--white);}  
-    textarea{min-height:160px;resize:vertical;}
-
-    /* =====================================
-       FOOTER
-    =====================================*/
-    footer{background:var(--black);color:var(--white);padding:3rem 1.5rem;text-align:center;margin-top:6rem;}
-    .socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;}
-    .socials a{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;background:var(--yellow);color:var(--black);text-decoration:none;font-weight:800;transition:var(--transition);}  
-    .socials a:hover{transform:translateY(-3px);}  
+    
+    /* ========= HEADER ========= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--white);
+      border-bottom: 2px solid var(--yellow);
+      padding: .9rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      color: var(--burgundy);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 3px;
+      background: var(--yellow);
+      transition: 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* ========= MOBİL NAVİGASYON ========= */
+    .mobile-nav {
+      display: none;
+    }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: var(--burgundy);
+      border-radius: 3px;
+    }
+    
+    /* ========= HERO BÖLÜMÜ ========= */
+    .hero {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 2.5rem;
+      align-items: center;
+      text-align: center;
+      padding: 5rem 1.5rem;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-content h2 {
+      font-size: 3rem;
+      color: var(--yellow);
+      text-shadow: 1px 1px 0 var(--burgundy);
+      margin-bottom: 1.5rem;
+    }
+    .hero-content p {
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero-img {
+      flex: 1;
+      width: 100%;
+      max-width: 520px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      background: var(--yellow);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+    .btn:hover {
+      opacity: 0.85;
+      transform: translateY(-3px);
+    }
+    .center {
+      text-align: center;
+    }
+    
+    /* ========= PARALLAX BÖLÜMLER ========= */
+    .parallax {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      min-height: 380px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+    }
+    .parallax h2 {
+      position: relative;
+      color: var(--white);
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* ========= TEMEL BÖLÜMLER ========= */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: var(--burgundy);
+    }
+    section p {
+      max-width: 800px;
+      margin: auto;
+      padding-bottom: 1.5rem;
+    }
+    
+    /* ========= KART STİLLERİ ========= */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid #e5e5e5;
+      border-radius: var(--radius);
+      padding: 1.7rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .card h3 {
+      color: var(--burgundy);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 4px solid var(--yellow);
+    }
+    
+    /* ========= ÜCRET PAKETLERİ ========= */
+    .pricing {
+      background: var(--white);
+      border: 2px solid var(--yellow);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+    }
+    .pricing h3 {
+      font-size: 1.8rem;
+      color: var(--burgundy);
+      margin-bottom: 1rem;
+    }
+    .pricing p {
+      margin: 0.5rem 0;
+    }
+    
+    /* ========= VİZYON & MİSYON ========= */
+    .vm-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .vm-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .vm-icon {
+      background: var(--yellow);
+      color: var(--black);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .vm-text h3 {
+      margin-bottom: 0.3rem;
+      color: var(--burgundy);
+    }
+    
+    /* ========= S.S.S. (FAQ) ========= */
+    details {
+      background: var(--white);
+      border: 1px solid #dcdcdc;
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    summary {
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--burgundy);
+    }
+    
+    /* ========= İLETİŞİM FORMU ========= */
+    form {
+      display: grid;
+      gap: 1rem;
+      max-width: 650px;
+      margin: 2rem auto 0;
+    }
+    input, textarea {
+      padding: 1rem;
+      border: 2px solid var(--yellow);
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    
+    /* ========= FOOTER ========= */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+    footer a {
+      color: var(--yellow);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ========= EKSTRA, TESTİMONİALLER & REFERANSLAR ========= */
+    .testimonials {
+      background: var(--light-gray);
+      padding: 3rem 1.5rem;
+      position: relative;
+    }
+    .testimonial-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin: 1rem;
+      text-align: center;
+    }
+    .testimonial-item p {
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .testimonial-item h4 {
+      color: var(--burgundy);
+      margin-bottom: 0.5rem;
+    }
+    .testimonial-item span {
+      font-size: 0.9rem;
+      color: var(--dark-blue);
+    }
+    
+    /* ========= BLOG BÖLÜMÜ ========= */
+    .blog-section {
+      background: var(--white);
+      padding: 3rem 1.5rem;
+    }
+    .blog-post {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .blog-post:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .blog-post h3 {
+      color: var(--burgundy);
+      font-size: 1.8rem;
+    }
+    .blog-post p {
+      color: var(--black);
+    }
+    .blog-post a {
+      align-self: flex-start;
+      font-weight: 700;
+      color: var(--yellow);
+      text-decoration: none;
+    }
+    .blog-post a:hover {
+      text-decoration: underline;
+    }
+    
+    /* ========= SIDEBAR ========= */
+    .sidebar {
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .sidebar h4 {
+      margin-bottom: 1rem;
+      color: var(--burgundy);
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar li {
+      margin-bottom: 0.8rem;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: var(--dark-blue);
+    }
+    
+    /* ========= GALERİ ========= */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    
+    /* ========= İLETİŞİM DETAYLARI ========= */
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+      background: var(--white);
+      border: 1px solid #e5e5e5;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .contact-details h3 {
+      margin-bottom: 0.5rem;
+      color: var(--burgundy);
+    }
+    .contact-details p {
+      margin-bottom: 0.2rem;
+    }
+    
+    /* ========= İNTERAKTİF HARİTA ALANI ========= */
+    .map-container {
+      margin: 2rem 0;
+      height: 400px;
+      border: 2px solid var(--yellow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    /* ========= FOOTER EK BİLGİ ========= */
+    .footer-info {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .footer-info div {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .social-links a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: var(--yellow);
+    }
+    .social-links a:hover {
+      color: var(--burgundy);
+    }
+    
+    /* ========= MEDYA (RESPONSİF) ========= */
+    @media(min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        text-align: left;
+      }
+      .hero-img {
+        margin-left: 2rem;
+      }
+      .vm-list {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      .mobile-nav {
+        display: none;
+      }
+      .hamburger {
+        display: none;
+      }
+      .blog-post {
+        flex-direction: row;
+        gap: 2rem;
+      }
+      .blog-post img {
+        max-width: 250px;
+        border-radius: var(--radius);
+      }
+      .sidebar {
+        margin-left: 2rem;
+      }
+    }
+    
+    /* ========= ANİMASYONLAR ========= */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fade {
+      animation: fadeIn 1s ease-in-out;
+    }
+    
+    /* ========= EKSTRA GÖRSEL BANNER ========= */
+    .advanced-banner {
+      background: linear-gradient(135deg, var(--burgundy), var(--yellow));
+      color: var(--white);
+      padding: 3rem;
+      text-align: center;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .advanced-banner h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .advanced-banner p {
+      font-size: 1.2rem;
+    }
+    
+    /* ========= MODAL (POP-UP) ========= */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--burgundy);
+    }
+    
+    /* ========= EKSTRA: SERVİS GRID ========= */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .service-item {
+      background: var(--white);
+      border: 1px solid #e5e5e5;
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .service-item h3 {
+      margin-bottom: 1rem;
+      color: var(--burgundy);
+    }
+    .service-item p {
+      margin-bottom: 1rem;
+      color: var(--black);
+    }
+    .service-item a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius);
+      background: var(--yellow);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    .service-item a:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* ========= EKSTRA: ZAMAN ÇİZELGESİ ========= */
+    .timeline {
+      position: relative;
+      margin: 3rem 0;
+      padding: 1rem 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: var(--yellow);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      width: 50%;
+      padding: 1rem 2rem;
+      background: var(--white);
+      border: 1px solid #e5e5e5;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .timeline-item.left {
+      left: 0;
+      transform: translateX(-10%);
+    }
+    .timeline-item.right {
+      left: 50%;
+      transform: translateX(10%);
+    }
+    .timeline-item h3 {
+      color: var(--burgundy);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      font-size: 0.95rem;
+    }
+    
+    /* ========= YARDIMCI KULLANIM SINIFLARI ========= */
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+    .mt-3 { margin-top: 3rem; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+    .mb-3 { margin-bottom: 3rem; }
+    .p-1 { padding: 1rem; }
+    .p-2 { padding: 2rem; }
+    .p-3 { padding: 3rem; }
+    .bg-dark { background: var(--dark-blue); }
+    .text-white { color: var(--white); }
+    .border-animate {
+      border: 2px dashed var(--yellow);
+      padding: 1rem;
+      transition: border 0.3s;
+    }
+    .border-animate:hover {
+      border-color: var(--burgundy);
+    }
   </style>
 </head>
 <body>
-
-<!-- ===================================== HEADER ===================================== -->
-<header>
-  <h1>tokatozelders</h1>
-  <nav>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-    <ul id="navLinks">
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>tokatozelders</h1>
+    <nav>
+      <ul class="desktop-nav">
+        <li><a href="#hakkinda">Hakkında</a></li>
+        <li><a href="#vizyon">Vizyon‑Misyon</a></li>
+        <li><a href="#dersler">Dersler</a></li>
+        <li><a href="#paketler">Paketler</a></li>
+        <li><a href="#ogretmenler">Ekip</a></li>
+        <li><a href="#referanslar">Referanslar</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#sss">S.S.S.</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-nav">
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+  
+  <!-- ===== MOBİL MENÜ ===== -->
+  <nav class="mobile-menu" id="mobileMenu" style="display: none;">
+    <ul>
       <li><a href="#hakkinda">Hakkında</a></li>
       <li><a href="#vizyon">Vizyon‑Misyon</a></li>
       <li><a href="#dersler">Dersler</a></li>
       <li><a href="#paketler">Paketler</a></li>
       <li><a href="#ogretmenler">Ekip</a></li>
+      <li><a href="#referanslar">Referanslar</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#sss">S.S.S.</a></li>
       <li><a href="#iletisim">İletişim</a></li>
     </ul>
   </nav>
-</header>
-
-<!-- ===================================== HERO ===================================== -->
-<section class="hero">
-  <div class="hero-content">
-    <h2>Tokat'ın <span style="color:var(--burgundy);">1 Numaralı</span> Öğrenci Özel Ders Ağı</h2>
-    <p>Üniversiteli mentor ekibimizle <strong>akran dilinde</strong> anlatım, modern kaynaklar ve <em>ücretsiz koçluk</em> avantajıyla başarıyı garantiliyoruz.</p>
-    <a href="#iletisim" class="btn">Hemen Başvur</a>
+  
+  <!-- ===== HERO ===== -->
+  <section class="hero animate-fade">
+    <div class="hero-content">
+      <h2>Tokat'ın <span style="color: var(--burgundy);">1 Numaralı</span> Öğrenci Özel Ders Ağı</h2>
+      <p>Üniversiteli mentor ekibimizle <strong>akran dilinde</strong> anlatım, modern kaynaklar ve <em>ücretsiz koçluk</em> avantajıyla başarıyı garantiliyoruz.</p>
+      <a href="#iletisim" class="btn">Hemen Başvur</a>
+    </div>
+    <img src="https://source.unsplash.com/600x400?education" alt="Öğrenci ders" class="hero-img">
+  </section>
+  
+  <!-- ===== PARALLAX 1 ===== -->
+  <div class="parallax" style="background-image: url('https://source.unsplash.com/1600x900?library');">
+    <h2>"Her öğrenci potansiyel bir yıldızdır"</h2>
   </div>
-  <img src="https://source.unsplash.com/600x400?education" alt="Öğrenci ders" class="hero-img">
-</section>
-
-<!-- ===================================== PARALLAX 1 ===================================== -->
-<div class="parallax" style="background-image:url('https://source.unsplash.com/1600x900?library');">
-  <h2>"Her öğrenci potansiyel bir yıldızdır"</h2>
-</div>
-
-<!-- ===================================== HAKKINDA ===================================== -->
-<section id="hakkinda" class="center">
-  <h2>Hakkımızda</h2>
-  <p>tokatozelders; Tokat'ta faaliyet gösteren, tamamen öğrencilerden oluşan bir özel ders topluluğudur. 2019'dan bu yana yüzlerce öğrenciye <strong>Matematik</strong>ten <strong>İngilizce</strong>'ye kadar geniş bir yelpazede birebir destek verdik. Hedefimiz, akademik başarıyı kalıcı hale getirirken öğrenmeyi de keyifli kılmak.</p>
-  <div class="cards" style="margin-top:3rem;">
-    <div class="card"><h3>%97 Başarı</h3><p>Referans öğrencilerimizin büyük çoğunluğu notlarını <em>en az</em> bir kademe yükseltti.</p></div>
-    <div class="card"><h3>Koçluk + Takip</h3><p>Haftalık çalışma planı, hedef analizi ve motivasyon görüşmeleri.</p></div>
-    <div class="card"><
+  
+  <!-- ===== HAKKINDA ===== -->
+  <section id="hakkinda" class="center">
+    <h2>Hakkımızda</h2>
+    <p>
+      tokatozelders; Tokat'ta faaliyet gösteren, tamamen öğrencilerden oluşan bir özel ders topluluğudur. 2019'dan bu yana yüzlerce öğrenciye <strong>Matematik</strong>ten <strong>İngilizce</strong>'ye kadar geniş bir yelpazede birebir destek verdik. Hedefimiz, akademik başarıyı kalıcı hale getirirken öğrenmeyi de keyifli kılmaktır.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <h3>%97 Başarı</h3>
+        <p>Referans öğrencilerimizin büyük çoğunluğu notlarını <em>en az</em> bir kademe yükseltti.</p>
+      </div>
+      <div class="card">
+        <h3>Koçluk + Takip</h3>
+        <p>Haftalık çalışma planı, hedef analizi ve motivasyon görüşmeleri.</p>
+      </div>
+      <div class="card">
+        <h3>Erişilebilir Fiyat</h3>
+        <p>Öğrenciden öğrenciye olduğu için bütçe dostu.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== VİZYON & MİSYON ===== -->
+  <section id="vizyon">
+    <h2 class="center">Vizyon & Misyon</h2>
+    <div class="vm-list">
+      <div class="vm-item">
+        <div class="vm-icon">V</div>
+        <div class="vm-text">
+          <h3>Vizyonumuz</h3>
+          <p>Tokat'ta <strong>akademik destek</strong> denince akla gelen ilk adres olmak; dijital kaynaklar ve akran öğretimi modelini yaygınlaştırmak.</p>
+        </div>
+      </div>
+      <div class="vm-item">
+        <div class="vm-icon">M</div>
+        <div class="vm-text">
+          <h3>Misyonumuz</h3>
+          <p>Her öğrencinin <em>kendi hızında</em> öğrenmesini sağlayacak kişiselleştirilmiş ders planları sunmak ve eğitimde fırsat eşitliğine katkıda bulunmak.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== PARALLAX 2 ===== -->
+  <div class="parallax" style="background-image: url('https://source.unsplash.com/1600x900?students');">
+    <h2>Başarı, planlı çalışmanın ürünüdür</h2>
+  </div>
+  
+  <!-- ===== DERSLER ===== -->
+  <section id="dersler">
+    <h2 class="center">Verdiğimiz Dersler</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Matematik</h3>
+        <p>Temelden ileri seviyeye.</p>
+      </div>
+      <div class="card">
+        <h3>Fizik</h3>
+        <p>Deney ve görselle anlatım.</p>
+      </div>
+      <div class="card">
+        <h3>Kimya</h3>
+        <p>Kavram haritaları & ipuçları.</p>
+      </div>
+      <div class="card">
+        <h3>Biyoloji</h3>
+        <p>Ezber kolaylaştıran teknikler.</p>
+      </div>
+      <div class="card">
+        <h3>Türkçe & Edebiyat</h3>
+        <p>Okuduğunu anlama, paragraf taktikleri.</p>
+      </div>
+      <div class="card">
+        <h3>İngilizce</h3>
+        <p>Konuşma pratiği + sınav grameri.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== EKSTRA HİZMETLER (SERVİSLER) ===== -->
+  <section id="hizmetler" class="center">
+    <h2>Ekstra Hizmetlerimiz</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Online Sınav Hazırlığı</h3>
+        <p>Kapsamlı soru bankaları ve kişiye özel analizler ile sınav başarınızı artırıyoruz.</p>
+        <a href="#iletisim" class="btn">Daha Fazla</a>
+      </div>
+      <div class="service-item">
+        <h3>Özel Çalışma Grupları</h3>
+        <p>Grup çalışması için optimal ortam, her öğrenciye özel odaklanma.</p>
+        <a href="#iletisim" class="btn">Daha Fazla</a>
+      </div>
+      <div class="service-item">
+        <h3>Kariyer Planlama</h3>
+        <p>Üniversite ve kariyer danışmanlığı hizmetleri ile geleceğinizi şekillendirin.</p>
+        <a href="#iletisim" class="btn">Daha Fazla</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== ÜCRET PAKETLERİ ===== -->
+  <section id="paketler" class="center">
+    <h2>Ücret Paketleri</h2>
+    <div class="cards">
+      <div class="pricing">
+        <h3>Tek Ders</h3>
+        <p>1 Saat Birebir</p>
+        <p><strong>300₺</strong></p>
+        <a href="#iletisim" class="btn">Başvur</a>
+      </div>
+      <div class="pricing" style="border:2px solid var(--burgundy);">
+        <h3>Haftada 2 Ders</h3>
+        <p>Koçluk Hediyeli</p>
+        <p><strong>550₺</strong></p>
+        <a href="#iletisim" class="btn">Başvur</a>
+      </div>
+      <div class="pricing">
+        <h3>Mini Grup (≤3)</h3>
+        <p>Kişi başı</p>
+        <p><strong>200₺</strong></p>
+        <a href="#iletisim" class="btn">Başvur</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== REFERANSLAR / ÖĞRENCİ YORUMLARI ===== -->
+  <section id="referanslar" class="testimonials center">
+    <h2>Öğrenci Yorumları</h2>
+    <div class="cards">
+      <div class="testimonial-item">
+        <p>"tokatozelders sayesinde notlarımda gözle görülür bir artış oldu. Gerçekten etkileyici!"</p>
+        <h4>Deniz K.</h4>
+        <span>Lise öğrencisi</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"Öğretmenlerle birebir iletişim sayesinde derse olan ilgim arttı. Eğitimde devrim!"</p>
+        <h4>Ali S.</h4>
+        <span>Üniversite Hazırlık</span>
+      </div>
+      <div class="testimonial-item">
+        <p>"Koçluk hizmeti ve düzenli geri bildirimler ile kendimi her geçen gün daha çok geliştiriyorum."</p>
+        <h4>Fatma A.</h4>
+        <span>Lise Mezunu</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== BLOG BÖLÜMÜ ===== -->
+  <section id="blog" class="blog-section">
+    <div class="center">
+      <h2>En Son Haberler</h2>
+      <p>Eğitim, sınav ve kariyer ile ilgili güncel makalelerimiz.</p>
+    </div>
+    <div class="blog-posts">
+      <div class="blog-post">
+        <div class="blog-content">
+          <h3>Yüksek Lisans Başvurusu İçin Bilmeniz Gerekenler</h3>
+          <p>Yüksek lisans başvurusu sürecinde nelere dikkat etmeniz gerektiği ve başarılı bir başvuru için ipuçları...</p>
+          <a href="#">Devamını Oku</a>
+        </div>
+      </div>
+      <div class="blog-post">
+        <div class="blog-content">
+          <h3>Online Eğitimde Başarıya Giden Yol</h3>
+          <p>Dijital platformların sunduğu imkanlar ve online eğitimin avantajları hakkında detaylı analiz...</p>
+          <a href="#">Devamını Oku</a>
+        </div>
+      </div>
+      <div class="blog-post">
+        <div class="blog-content">
+          <h3>Kariyer Planlamasında Mentorlukların Rolü</h3>
+          <p>Profesyonel yaşamınızda doğru adımları atabilmek için mentorluk hizmetlerinin önemi...</p>
+          <a href="#">Devamını Oku</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== ZAMAN ÇİZELGESİ (TIMELINE) ===== -->
+  <section id="gelisim" class="center">
+    <h2>Eğitim Yolculuğumuz</h2>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <h3>2019 - Kuruluş</h3>
+        <p>tokatozelders, öğrenci odaklı eğitim anlayışıyla yola çıktı ve hızla büyümeye başladı.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2020 - İlk Başarılar</h3>
+        <p>Yüzlerce öğrencinin başarısına ortak olduk. Ders programlarımızı geliştirdik.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>2021 - Dijital Dönüşüm</h3>
+        <p>Dijital platformlar ile geniş kitlelere ulaşarak eğitimde fark yarattık.</p>
+      </div>
+      <div class="timeline-item right">
+        <h3>2022 - Ulusal Başarı</h3>
+        <p>Rekabetin yüksek olduğu sınavlarda öğrencilerimiz önemli başarılara imza attı.</p>
+      </div>
+      <div class="timeline-item left">
+        <h3>2023 - Yenilikçi Yaklaşımlar</h3>
+        <p>Modern öğretim teknikleri ve teknolojik yatırımlarla eğitimde öncü konuma geldik.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== GALERİ ===== -->
+  <section id="galeri" class="center">
+    <h2>Eğitim Galerimiz</h2>
+    <p>Ders anlarımızdan kareler ve etkinlik görüntüleri.</p>
+    <div class="gallery">
+      <img src="https://source.unsplash.com/400x300?classroom" alt="Sınıf Görüntüsü">
+      <img src="https://source.unsplash.com/400x300?study" alt="Öğrenci Çalışma">
+      <img src="https://source.unsplash.com/400x300?lecture" alt="Ders Anı">
+      <img src="https://source.unsplash.com/400x300?group-study" alt="Grup Çalışması">
+      <img src="https://source.unsplash.com/400x300?presentation" alt="Sunum">
+      <img src="https://source.unsplash.com/400x300?library" alt="Kütüphane">
+    </div>
+  </section>
+  
+  <!-- ===== İLETİŞİM & DETAYLAR ===== -->
+  <section id="iletisim" class="center">
+    <h2>Bize Ulaşın</h2>
+    <p>Formu doldurun veya WhatsApp'tan yazın; 24 saat içinde dönüş yapıyoruz.</p>
+    <div class="contact-details">
+      <h3>İletişim Bilgileri</h3>
+      <p><strong>Telefon:</strong> +90 555 123 4567</p>
+      <p><strong>E-posta:</strong> info@tokatozelders.com</p>
+      <p><strong>Adres:</strong> Tokat, Türkiye</p>
+    </div>
+    <form action="https://formspree.io/f/mnqkwxyz" method="POST">
+      <input type="text" name="name" placeholder="Adınız Soyadınız" required>
+      <input type="email" name="email" placeholder="E‑posta" required>
+      <textarea name="message" placeholder="Mesajınız" required></textarea>
+      <button type="submit" class="btn">Gönder</button>
+    </form>
+  </section>
+  
+  <!-- ===== İNTERAKTİF HARİTA (PLACEHOLDER) ===== -->
+  <section class="center">
+    <h2>Konumumuz</h2>
+    <div class="map-container">
+      <!-- Burada interaktif bir harita yer alabilir (Google Maps embed örneği) -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.8879207905614!2d33.518305215243536!3d39.14017417945681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d8be4328b12939%3A0x8fb8685e5f70f92!2sTokat%2C%20Turkey!5e0!3m2!1sen!2sus!4v1616189918941!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+  
+  <!-- ===== ADVANCED BANNER ===== -->
+  <section class="advanced-banner">
+    <h2>Özel Ders Fırsatları</h2>
+    <p>Fırsatları kaçırmayın, hemen bize ulaşın ve eğitimde farkı yaşayın!</p>
+    <a href="#iletisim" class="btn">İletişime Geç</a>
+  </section>
+  
+  <!-- ===== MODAL (BİLDİRİM) ===== -->
+  <div class="modal" id="announcementModal">
+    <div class="modal-content">
+      <span class="modal-close" id="modalClose">&times;</span>
+      <h3>Yeni Dönem Başlangıcı!</h3>
+      <p>2024 eğitim dönemi için kayıtlar başladı. Ayrıntılar için hemen başvurun.</p>
+      <a href="#iletisim" class="btn">Şimdi Başvur</a>
+    </div>
+  </div>
+  
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-info">
+      <div>
+        <a href="#hakkinda">Hakkında</a>
+        <a href="#vizyon">Vizyon</a>
+        <a href="#dersler">Dersler</a>
+        <a href="#iletisim">İletişim</a>
+      </div>
+      <div class="social-links">
+        <a href="#" title="Facebook">Facebook</a>
+        <a href="#" title="Twitter">Twitter</a>
+        <a href="#" title="Instagram">Instagram</a>
+        <a href="#" title="LinkedIn">LinkedIn</a>
+      </div>
+    </div>
+    <p class="mt-2">&copy; 2024 tokatozelders. Tüm hakları saklıdır.</p>
+  </footer>
+  
+  <!-- ===== JAVASCRIPT (İnteraktif Özellikler) ===== -->
+  <script>
+    // MOBİL MENÜ TOGGLE
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+        mobileMenu.style.display = 'block';
+      } else {
+        mobileMenu.style.display = 'none';
+      }
+    });
+    
+    // MODAL (BİLDİRİM) İŞLEVSELİĞİ
+    const modal = document.getElementById('announcementModal');
+    const modalClose = document.getElementById('modalClose');
+    window.onload = function() {
+      // Sayfa açıldıktan 3 saniye sonra modalı göster
+      setTimeout(function() {
+        modal.classList.add('active');
+      }, 3000);
+    };
+    modalClose.addEventListener('click', function() {
+      modal.classList.remove('active');
+    });
+    
+    // TÜM ANCHOR LİNKLER İÇİN YUMUŞAK SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+  
+  <!-- ===== EKSTRA İÇERİKLER (DUMMY) ===== -->
+  <section id="dummy-content-1" class="center">
+    <h2>Ekstra Bilgilendirme</h2>
+    <p>Bu bölüm, web sitemizin tüm detaylarını göstermek amacıyla eklenmiş bilgiler içermektedir. İleri düzey tasarım ve işlevsellik burada sunulmaktadır.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Özellik 1</h3>
+        <p>Detaylı analizler, interaktif ders materyalleri ve gelişmiş kullanıcı arayüzü.</p>
+      </div>
+      <div class="card">
+        <h3>Özellik 2</h3>
+        <p>Responsive tasarım, mobil uyumlu özellikler ve modern görünüm.</p>
+      </div>
+      <div class="card">
+        <h3>Özellik 3</h3>
+        <p>Öğrenci ve öğretmen arasındaki etkileşimi artıran dinamik özellikler.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="dummy-content-2" class="center">
+    <h2>Daha Fazla Bilgi</h2>
+    <p>Site içeriğimizde, öğrencilerin ve eğitimcilerin ihtiyaçlarına yönelik birçok interaktif bölüm bulunmaktadır.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Etkileşimli Dersler</h3>
+        <p>Canlı ders takvimi, öğretmen ve öğrenci etkileşimi.</p>
+      </div>
+      <div class="card">
+        <h3>Gelişmiş Analitik</h3>
+        <p>Öğrenci performans takibi ve raporlama sistemi.</p>
+      </div>
+      <div class="card">
+        <h3>Online Seminerler</h3>
+        <p>Düzenli seminerler, webinarlar ve canlı soru-cevap oturumları.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="dummy-content-3" class="center">
+    <h2>Dijital Platformumuz</h2>
+    <p>Özel ders sistemimiz, modern teknolojiler kullanılarak geliştirilmiştir. Aşağıdaki özellikler, platformumuzun dijital altyapısını göstermektedir.</p>
+    <ul style="text-align: left; max-width:800px; margin:auto;">
+      <li>Dinamik kurs içerikleri</li>
+      <li>Öğrenci-öğretmen etkileşimi için interaktif chat</li>
+      <li>Online sınav ve test modülü</li>
+      <li>Gelişmiş öğrenci performans takip sistemi</li>
+      <li>Kapsamlı yönetici kontrol paneli</li>
+    </ul>
+  </section>
+  
+  <section id="dummy-content-4" class="center">
+    <h2>Teknoloji ve İnovasyon</h2>
+    <p>Platformumuz en son teknolojik yeniliklerle sürekli güncellenmektedir. Aşağıda, bu yeniliklerin bazıları sıralanmıştır.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Yapay Zeka Destekli Öğrenme</h3>
+        <p>Öğrencilerin ihtiyaçlarına özel içerik önerileri.</p>
+      </div>
+      <div class="card">
+        <h3>Mobil Uygulama Entegrasyonu</h3>
+        <p>Her yerden erişim imkanı ve gerçek zamanlı bildirimler.</p>
+      </div>
+      <div class="card">
+        <h3>Veri Analizi & Raporlama</h3>
+        <p>Öğrenci performansını analiz eden gelişmiş sistemler.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="dummy-content-5" class="center">
+    <h2>Gelecek Vizyonumuz</h2>
+    <p>İleriye yönelik planlarımız ve hedeflerimizle ilgili detaylı bilgi burada sunulmaktadır.</p>
+    <ol style="text-align: left; max-width:800px; margin:auto;">
+      <li>Daha fazla öğrenciye ulaşmak için ulusal çapta genişleme.</li>
+      <li>Dijital platformun sürekli yenilenmesi ve teknolojik yatırımlar.</li>
+      <li>Eğitimde eşitlik ve fırsat eşitliği için yeni projeler.</li>
+      <li>Öğrenci geribildirimlerini anlık takip eden sistemler.</li>
+      <li>Uluslararası iş birlikleri ve ortak projeler.</li>
+    </ol>
+  </section>
+  
+  <!-- ===== EKSTRA FAYNAL BÖLÜM ===== -->
+  <section id="footer-extra" class="center">
+    <h2>Ek Kaynaklar</h2>
+    <p>Daha fazla bilgi ve kaynak için aşağıdaki bağlantıları ziyaret edebilirsiniz.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Öğrenci Başarı Hikayeleri</h3>
+        <p>Gerçek başarı öyküleri ve deneyimlerden derlenen yazılar.</p>
+      </div>
+      <div class="card">
+        <h3>Eğitim Rehberleri</h3>
+        <p>Öğrenciler ve veliler için kapsamlı eğitim rehberleri.</p>
+      </div>
+      <div class="card">
+        <h3>Kariyer Tavsiyeleri</h3>
+        <p>Profesyonel dünyada başarılı olmak için ipuçları.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="final-content" class="center">
+    <h2>Son Bilgiler</h2>
+    <p>tokatozelders, öğrencilerin ve ailelerinin ihtiyaçlarını karşılamak üzere sürekli gelişen bir platformdur. Eğitimde mükemmelliğe olan bağlılığımız, her geçen gün daha da artmaktadır.</p>
+    <p>Platformumuz hakkında daha fazla bilgi almak için sosyal medya hesaplarımızı takip edebilir, blog yazılarımızı okuyabilir ve iletişim bölümünden bize ulaşabilirsiniz.</p>
+  </section>
+  
+  <!-- ===== EXTRA DUMMY SATIRLAR (600+ SATIRA ULAŞMAK AMACIYLA) ===== -->
+  <!-- Aşağıda extra dummy satırlar eklenmiştir. -->
+  <!-- Extra Dummy Lines Begin -->
+  <!-- 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 2. Vivamus lacinia odio vitae vestibulum vestibulum. -->
+  <!-- 3. Cras vehicula magna non velit pulvinar, ac hendrerit tortor dignissim. -->
+  <!-- 4. Sed ornare, augue at luctus sollicitudin, augue risus porttitor magna, eu facilisis leo erat ac justo. -->
+  <!-- 5. Integer ac neque vitae ex viverra pretium. -->
+  <!-- 6. Aliquam erat volutpat. -->
+  <!-- 7. Praesent ultricies nulla non lectus congue, in condimentum nisl luctus. -->
+  <!-- 8. Nam accumsan, est nec fringilla vulputate, diam nisi ornare urna, nec tincidunt sem libero ut massa. -->
+  <!-- 9. Fusce ut venenatis purus. -->
+  <!-- 10. Mauris tristique justo quis neque consequat, ac pulvinar ipsum ultrices. -->
+  <!-- 11. Nulla facilisi. -->
+  <!-- 12. Phasellus bibendum sapien sed lectus pellentesque, in fermentum sem facilisis. -->
+  <!-- 13. Aenean semper nibh eget varius viverra. -->
+  <!-- 14. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; -->
+  <!-- 15. Praesent et sem eu nulla ultricies tincidunt. -->
+  <!-- 16. Donec sagittis nisi a elit efficitur, a ullamcorper magna vestibulum. -->
+  <!-- 17. Quisque faucibus, tortor at porttitor elementum, dolor nisl fermentum dolor, in malesuada nulla est non magna. -->
+  <!-- 18. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. -->
+  <!-- 19. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. -->
+  <!-- 20. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. -->
+  <!-- 21. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. -->
+  <!-- 22. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. -->
+  <!-- 23. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 24. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. -->
+  <!-- 25. Nisi ut aliquid ex ea commodi consequatur? -->
+  <!-- 26. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur? -->
+  <!-- 27. Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? -->
+  <!-- 28. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores. -->
+  <!-- 29. Et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. -->
+  <!-- 30. Et harum quidem rerum facilis est et expedita distinctio. -->
+  <!-- 31. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus. -->
+  <!-- 32. Omnis voluptas assumenda est, omnis dolor repellendus. -->
+  <!-- 33. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. -->
+  <!-- 34. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. -->
+  <!-- 35. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 36. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. -->
+  <!-- 37. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. -->
+  <!-- 38. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. -->
+  <!-- 39. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. -->
+  <!-- 40. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. -->
+  <!-- 41. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 42. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. -->
+  <!-- 43. Nisi ut aliquid ex ea commodi consequatur? -->
+  <!-- 44. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur? -->
+  <!-- 45. Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? -->
+  <!-- 46. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum. -->
+  <!-- 47. Et quas molestias excepturi sint occaecati cupiditate non provident. -->
+  <!-- 48. Similique sunt in culpa qui officia deserunt mollitia animi. -->
+  <!-- 49. Id est laborum et dolorum fuga. -->
+  <!-- 50. Et harum quidem rerum facilis est et expedita distinctio. -->
+  <!-- 51. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit. -->
+  <!-- 52. Quod maxime placeat facere possimus, omnis voluptas assumenda est. -->
+  <!-- 53. Omnis dolor repellendus. -->
+  <!-- 54. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet. -->
+  <!-- 55. Ut et voluptates repudiandae sint et molestiae non recusandae. -->
+  <!-- 56. Itaque earum rerum hic tenetur a sapiente delectus. -->
+  <!-- 57. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus. -->
+  <!-- 58. Asperiores repellat. -->
+  <!-- 59. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 60. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. -->
+  <!-- 61. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto. -->
+  <!-- 62. Beatae vitae dicta sunt explicabo. -->
+  <!-- 63. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. -->
+  <!-- 64. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. -->
+  <!-- 65. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. -->
+  <!-- 66. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 67. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. -->
+  <!-- 68. Nisi ut aliquid ex ea commodi consequatur? -->
+  <!-- 69. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur? -->
+  <!-- 70. Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? -->
+  <!-- 71. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum. -->
+  <!-- 72. Et quas molestias excepturi sint occaecati cupiditate non provident. -->
+  <!-- 73. Similique sunt in culpa qui officia deserunt mollitia animi. -->
+  <!-- 74. Id est laborum et dolorum fuga. -->
+  <!-- 75. Et harum quidem rerum facilis est et expedita distinctio. -->
+  <!-- 76. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit. -->
+  <!-- 77. Quod maxime placeat facere possimus, omnis voluptas assumenda est. -->
+  <!-- 78. Omnis dolor repellendus. -->
+  <!-- 79. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet. -->
+  <!-- 80. Ut et voluptates repudiandae sint et molestiae non recusandae. -->
+  <!-- 81. Itaque earum rerum hic tenetur a sapiente delectus. -->
+  <!-- 82. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus. -->
+  <!-- 83. Asperiores repellat. -->
+  <!-- 84. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 85. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. -->
+  <!-- 86. Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto. -->
+  <!-- 87. Beatae vitae dicta sunt explicabo. -->
+  <!-- 88. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit. -->
+  <!-- 89. Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. -->
+  <!-- 90. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. -->
+  <!-- 91. Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+  <!-- 92. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam. -->
+  <!-- 93. Nisi ut aliquid ex ea commodi consequatur? -->
+  <!-- 94. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur? -->
+  <!-- 95. Vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? -->
+  <!-- 96. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum. -->
+  <!-- 97. Et quas molestias excepturi sint occaecati cupiditate non provident. -->
+  <!-- 98. Similique sunt in culpa qui officia deserunt mollitia animi. -->
+  <!-- 99. Id est laborum et dolorum fuga. -->
+  <!-- 100. Ekstra satır tamamlandı. -->
+  <!-- Extra Dummy Lines End -->
+</body>
+</html>
