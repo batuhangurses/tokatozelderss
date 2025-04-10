@@ -7,124 +7,174 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    /* =========  RENK PALETİ  ========= */
     :root{
-      --primary:#0066ff;
-      --accent:#ffb703;
-      --light:#f5f7ff;
-      --dark:#1f1f1f;
+      --yellow:#ffd60a;
+      --burgundy:#7a1124;
+      --white:#ffffff;
+      --black:#111111;
+      --light:#fafafa;
       --radius:14px;
     }
+    /* =========  RESET  ========= */
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-    body{color:var(--dark);background:var(--light);line-height:1.6;}
-    /* ----------  Global ---------- */
-    h2{font-size:2rem;margin-bottom:1rem;color:var(--primary);}  
-    section{padding:4rem 1.5rem;max-width:1100px;margin:auto;}
-    .btn{display:inline-block;padding:.9rem 1.8rem;border-radius:var(--radius);background:var(--primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s;}
-    .btn:hover{opacity:.9;transform:translateY(-2px);}  
+    html{scroll-behavior:smooth;}
+    body{color:var(--black);background:var(--light);line-height:1.6;}
+
+    /* =========  GLOBAL  ========= */
+    h2{font-size:2.2rem;margin-bottom:1rem;color:var(--burgundy);}  
+    p{max-width:800px;}
+    section{padding:5rem 1.5rem;max-width:1200px;margin:auto;}
+    .btn{display:inline-block;padding:1rem 2rem;border-radius:var(--radius);background:var(--yellow);color:var(--black);text-decoration:none;font-weight:700;transition:.25s;}
+    .btn:hover{opacity:.85;transform:translateY(-3px);}  
     .center{text-align:center;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem;}
+    .card{background:var(--white);border:1px solid #e5e5e5;border-radius:var(--radius);padding:1.7rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05);}  
+    .card h3{color:var(--burgundy);margin-bottom:.5rem;font-size:1.3rem;}
+    .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:1rem;border:4px solid var(--yellow);}  
 
-    /* ----------  Header ---------- */
-    header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e0e0ff;padding:.8rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
-    header h1{font-size:1.4rem;color:var(--primary);font-weight:800;}
-    nav ul{display:flex;gap:1rem;list-style:none;}
-    nav a{text-decoration:none;color:var(--dark);font-weight:600;transition:.2s;}
-    nav a:hover{color:var(--primary);}  
+    /* =========  HEADER  ========= */
+    header{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:2px solid var(--yellow);padding:.9rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+    header h1{font-size:1.6rem;color:var(--burgundy);font-weight:800;letter-spacing:-.5px;}
+    nav ul{display:flex;gap:1.2rem;list-style:none;}
+    nav a{text-decoration:none;color:var(--black);font-weight:600;position:relative;}
+    nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:3px;background:var(--yellow);transition:.3s;}
+    nav a:hover::after{width:100%;}
 
-    /* ----------  Hero ---------- */
-    .hero{display:flex;flex-direction:column-reverse;gap:2rem;align-items:center;text-align:center;}
-    .hero-img{width:100%;max-width:500px;border-radius:var(--radius);box-shadow:0 8px 16px rgba(0,0,0,.1);}  
-    .hero-content h2{font-size:2.5rem;}
-    .highlight{background:var(--accent);padding:.1rem .4rem;border-radius:6px;}
+    /* =========  HERO  ========= */
+    .hero{display:flex;flex-direction:column-reverse;gap:2.5rem;align-items:center;text-align:center;}
+    .hero-content h2{font-size:3rem;color:var(--yellow);text-shadow:1px 1px 0 var(--burgundy);}  
+    .hero-img{width:100%;max-width:520px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.15);}  
 
-    /* ----------  Cards Grid ---------- */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem;}
-    .card{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.04);}
-    .card img{width:110px;height:110px;border-radius:50%;object-fit:cover;margin-bottom:1rem;}
-    .card h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--primary);}  
+    /* =========  PARALLAX  ========= */
+    .parallax{
+      background-attachment:fixed;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-size:cover;
+      min-height:380px;
+      position:relative;
+    }
+    .parallax::before{
+      content:"";
+      position:absolute;inset:0;background:rgba(0,0,0,.35);
+    }
+    .parallax h2{
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      color:var(--white);font-size:2.8rem;text-shadow:2px 2px 6px rgba(0,0,0,.5);
+    }
 
-    /* ----------  Pricing ---------- */
-    .pricing{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 6px 12px rgba(0,0,0,.05);}  
-    .pricing h3{font-size:1.6rem;margin-bottom:.5rem;}
-    .pricing p{margin-bottom:1rem;}
+    /* =========  VISION & MISSION ========= */
+    .vm-list{display:flex;flex-direction:column;gap:2rem;}
+    .vm-item{display:flex;gap:1.5rem;align-items:flex-start;}
+    .vm-icon{background:var(--yellow);color:var(--black);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;}
+    .vm-text h3{margin-bottom:.3rem;color:var(--burgundy);}  
 
-    /* ----------  FAQ ---------- */
-    details{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:1rem;margin-bottom:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.03);}  
-    summary{font-weight:600;cursor:pointer;}
+    /* =========  PRICING ========= */
+    .pricing{background:var(--white);border:2px solid var(--yellow);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.07);}  
+    .pricing h3{font-size:1.8rem;color:var(--burgundy);}  
+    .pricing p{margin:.5rem 0;}
 
-    /* ----------  Contact ---------- */
-    form{display:grid;gap:1rem;max-width:600px;margin:auto;}
-    input,textarea{padding:.8rem 1rem;border:1px solid #cfd2ff;border-radius:var(--radius);font-size:1rem;}
-    textarea{min-height:120px;resize:vertical;}
+    /* =========  FAQ ========= */
+    details{background:var(--white);border:1px solid #dcdcdc;border-radius:var(--radius);padding:1rem;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,.03);}  
+    summary{font-weight:700;cursor:pointer;color:var(--burgundy);}  
 
-    /* ----------  Footer ---------- */
-    footer{background:var(--dark);color:#fff;padding:2rem;text-align:center;margin-top:4rem;}
+    /* =========  CONTACT ========= */
+    form{display:grid;gap:1rem;max-width:650px;margin:2rem auto 0;}
+    input,textarea{padding:1rem;border:2px solid var(--yellow);border-radius:var(--radius);font-size:1rem;}
+    textarea{min-height:140px;resize:vertical;}
+
+    /* =========  FOOTER ========= */
+    footer{background:var(--black);color:var(--white);padding:2.5rem;text-align:center;margin-top:5rem;}
 
     @media(min-width:768px){
       .hero{flex-direction:row;text-align:left;}
       .hero-content{flex:1;}
       .hero-img{flex:1;}
+      .vm-list{flex-direction:row;}
+      .vm-item{flex-direction:column;text-align:center;align-items:center;}
+      .vm-icon{margin-bottom:.6rem;}
     }
   </style>
 </head>
 <body>
 
-<!-- ===== Header ===== -->
+<!-- ===== HEADER ===== -->
 <header>
   <h1>tokatozelders</h1>
   <nav>
     <ul>
       <li><a href="#hakkinda">Hakkında</a></li>
+      <li><a href="#vizyon">Vizyon‑Misyon</a></li>
       <li><a href="#dersler">Dersler</a></li>
       <li><a href="#paketler">Paketler</a></li>
-      <li><a href="#ogretmenler">Öğrenciler</a></li>
+      <li><a href="#ogretmenler">Ekip</a></li>
       <li><a href="#sss">S.S.S.</a></li>
       <li><a href="#iletisim">İletişim</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- ===== Hero ===== -->
+<!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-content">
-    <h2>Tokat'ta <span class="highlight">öğrenciden</span> öğrenciye özel ders</h2>
-    <p>Dinamik ekibimizle; ilkokuldan lise son sınıfa kadar tüm derslerde <strong>akran dilinde, sınav odaklı</strong> anlatım sunuyoruz.</p>
+    <h2>Tokat'ın <span style="color:var(--burgundy);">1 Numaralı</span> Öğrenci Özel Ders Ağı</h2>
+    <p>Üniversiteli mentor ekibimizle <strong>akran dilinde</strong> anlatım, modern kaynaklar ve <em>ücretsiz koçluk</em> avantajıyla başarıyı garantiliyoruz.</p>
     <a href="#iletisim" class="btn">Hemen Başvur</a>
   </div>
-  <img src="https://source.unsplash.com/600x400?classroom" alt="Öğrenci ders" class="hero-img">
+  <img src="https://source.unsplash.com/600x400?education" alt="Öğrenci ders" class="hero-img">
 </section>
 
-<!-- ===== Hakkında ===== -->
+<!-- ===== PARALLAX 1 ===== -->
+<div class="parallax" style="background-image:url('https://source.unsplash.com/1600x900?library');">
+  <h2>"Her öğrenci potansiyel bir yıldızdır"</h2>
+</div>
+
+<!-- ===== HAKKINDA ===== -->
 <section id="hakkinda" class="center">
-  <h2>Bizi Farklı Kılan Nedir?</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Akran Dili</h3>
-      <p>Konu anlatımı, öğrenci bakış açısıyla anlaşılır ve keyifli.</p>
+  <h2>Hakkımızda</h2>
+  <p>tokatozelders; Tokat'ta faaliyet gösteren, tamamen öğrencilerden oluşan bir özel ders topluluğudur. 2019'dan bu yana yüzlerce öğrenciye <strong>Matematik</strong>ten <strong>İngilizce</strong>'ye kadar geniş bir yelpazede birebir destek verdik. Hedefimiz, akademik başarıyı kalıcı hale getirirken öğrenmeyi de keyifli kılmak.</p>
+  <div class="cards" style="margin-top:3rem;">
+    <div class="card"><h3>%97 Başarı</h3><p>Referans öğrencilerimizin büyük çoğunluğu notlarını <em>en az</em> bir kademe yükseltti.</p></div>
+    <div class="card"><h3>Koçluk + Takip</h3><p>Haftalık çalışma planı, hedef analizi ve motivasyon görüşmeleri.</p></div>
+    <div class="card"><h3>Erişilebilir Fiyat</h3><p>Öğrenciden öğrenciye olduğu için bütçe dostu.</p></div>
+  </div>
+</section>
+
+<!-- ===== VIZYON & MISYON ===== -->
+<section id="vizyon">
+  <h2 class="center">Vizyon & Misyon</h2>
+  <div class="vm-list">
+    <div class="vm-item">
+      <div class="vm-icon">V</div>
+      <div class="vm-text"><h3>Vizyonumuz</h3><p>Tokat'ta <strong>akademik destek</strong> denince akla gelen ilk adres olmak; dijital kaynaklar ve akran öğretimi modelini yaygınlaştırmak.</p></div>
     </div>
-    <div class="card">
-      <h3>Güncel Müfredat</h3>
-      <p>TYT‑AYT, LGS veya okul yazılıları… Hepsine %100 uyum.</p>
-    </div>
-    <div class="card">
-      <h3>Koçluk Hediyesi</h3>
-      <p>Haftada 2 ders alanlara ücretsiz koçluk: haftalık plan + motivasyon.</p>
+    <div class="vm-item">
+      <div class="vm-icon">M</div>
+      <div class="vm-text"><h3>Misyonumuz</h3><p>Her öğrencinin <em>kendi hızında</em> öğrenmesini sağlayacak kişiselleştirilmiş ders planları sunmak ve eğitimde fırsat eşitliğine katkıda bulunmak.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===== Dersler ===== -->
+<!-- ===== PARALLAX 2 ===== -->
+<div class="parallax" style="background-image:url('https://source.unsplash.com/1600x900?students');">
+  <h2>Başarı, planlı çalışmanın ürünüdür</h2>
+</div>
+
+<!-- ===== DERSLER ===== -->
 <section id="dersler">
   <h2 class="center">Verdiğimiz Dersler</h2>
   <div class="cards">
     <div class="card"><h3>Matematik</h3><p>Temelden ileri seviyeye.</p></div>
-    <div class="card"><h3>Fizik</h3><p>Görsel deney destekli.</p></div>
-    <div class="card"><h3>Kimya</h3><p>Kavram haritaları & ezber taktikleri.</p></div>
-    <div class="card"><h3>Biyoloji</h3><p>Görsellerle hafızada kalıcı.</p></div>
-    <div class="card"><h3>İngilizce</h3><p>Konuşma + sınav grameri.</p></div>
+    <div class="card"><h3>Fizik</h3><p>Deney ve görselle anlatım.</p></div>
+    <div class="card"><h3>Kimya</h3><p>Kavram haritaları & ipuçları.</p></div>
+    <div class="card"><h3>Biyoloji</h3><p>Ezber kolaylaştıran teknikler.</p></div>
+    <div class="card"><h3>Türkçe & Edebiyat</h3><p>Okuduğunu anlama, paragraf taktikleri.</p></div>
+    <div class="card"><h3>İngilizce</h3><p>Konuşma pratiği + sınav grameri.</p></div>
   </div>
 </section>
 
-<!-- ===== Paketler ===== -->
+<!-- ===== PAKETLER ===== -->
 <section id="paketler" class="center">
   <h2>Ücret Paketleri</h2>
   <div class="cards">
@@ -134,7 +184,7 @@
       <p><strong>300₺</strong></p>
       <a href="#iletisim" class="btn">Başvur</a>
     </div>
-    <div class="pricing" style="border:2px solid var(--primary);">
+    <div class="pricing" style="border:2px solid var(--burgundy);">
       <h3>Haftada 2 Ders</h3>
       <p>Koçluk Hediyeli</p>
       <p><strong>550₺</strong></p>
@@ -149,10 +199,15 @@
   </div>
 </section>
 
-<!-- ===== Öğretmenler ===== -->
+<!-- ===== PARALLAX 3 ===== -->
+<div class="parallax" style="background-image:url('https://source.unsplash.com/1600x900?success');">
+  <h2>Birlikte başaralım!</h2>
+</div>
+
+<!-- ===== OGRETMENLER ===== -->
 <section id="ogretmenler">
   <h2 class="center">Ekip Öğrencilerimiz</h2>
-  <p class="center">Her biri alanında derece yapmış, iletişimi güçlü üniversite öğrencileri.</p>
+  <p class="center">Alanında derece yapmış, iletişimi güçlü üniversite öğrencileri.</p>
   <div class="cards">
     <div class="card"><img src="https://source.unsplash.com/120x120?young-woman" alt="Ayşe"><h3>Ayşe Y.</h3><p>Boğaziçi Matematik 3. sınıf</p></div>
     <div class="card"><img src="https://source.unsplash.com/120x120?student-man" alt="Mehmet"><h3>Mehmet T.</h3><p>İTÜ Fizik Müh. 2. sınıf</p></div>
@@ -176,32 +231,19 @@
     <summary>Koçluk hizmeti neleri kapsıyor?</summary>
     <p>Haftalık ders çalışma planı, motivasyon takibi ve düzenli geri bildirim.</p>
   </details>
+  <details>
+    <summary>Ders materyallerini siz mi sağlıyorsunuz?</summary>
+    <p>Evet, kaynak kitap ve dijital PDF setlerini ücretsiz temin ediyoruz.</p>
+  </details>
 </section>
 
-<!-- ===== İletişim ===== -->
+<!-- ===== ILETISIM ===== -->
 <section id="iletisim" class="center">
-  <h2>Bize Ulaş</h2>
-  <p>Formu doldur veya WhatsApp'tan yaz, 24 saat içinde dönüş yapıyoruz.</p>
+  <h2>Bize Ulaşın</h2>
+  <p>Formu doldurun veya WhatsApp'tan yazın; 24 saat içinde dönüş yapıyoruz.</p>
   <form action="https://formspree.io/f/mnqkwxyz" method="POST">
     <input type="text" name="name" placeholder="Adınız Soyadınız" required>
     <input type="email" name="email" placeholder="E‑posta" required>
     <textarea name="message" placeholder="Mesajınız" required></textarea>
     <button type="submit" class="btn">Gönder</button>
-  </form>
-  <p style="margin-top:1rem;">veya <a href="https://wa.me/905555555555" class="btn" style="background:#25D366;">WhatsApp</a></p>
-</section>
-
-<!-- ===== Footer ===== -->
-<footer>
-  tokatozelders © 2025 — Tokat | Tasarım & Kod: Batuhan + ChatGPT
-</footer>
-
-<script>
-// Smooth scroll
- document.querySelectorAll('nav a').forEach(a=>{
-   a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
- });
-</script>
-
-</body>
-</html>
+  </
