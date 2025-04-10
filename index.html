@@ -7,152 +7,201 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root {
+    :root{
       --primary:#0066ff;
-      --secondary:#f5f7ff;
+      --accent:#ffb703;
+      --light:#f5f7ff;
       --dark:#1f1f1f;
+      --radius:14px;
     }
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-    body{line-height:1.6;color:var(--dark);}
-    header{background:var(--secondary);padding:1rem 2rem;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;}
-    header h1{font-size:1.5rem;color:var(--primary);}
+    body{color:var(--dark);background:var(--light);line-height:1.6;}
+    /* ----------  Global ---------- */
+    h2{font-size:2rem;margin-bottom:1rem;color:var(--primary);}  
+    section{padding:4rem 1.5rem;max-width:1100px;margin:auto;}
+    .btn{display:inline-block;padding:.9rem 1.8rem;border-radius:var(--radius);background:var(--primary);color:#fff;text-decoration:none;font-weight:600;transition:.2s;}
+    .btn:hover{opacity:.9;transform:translateY(-2px);}  
+    .center{text-align:center;}
+
+    /* ----------  Header ---------- */
+    header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #e0e0ff;padding:.8rem 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+    header h1{font-size:1.4rem;color:var(--primary);font-weight:800;}
     nav ul{display:flex;gap:1rem;list-style:none;}
-    nav a{text-decoration:none;color:var(--dark);font-weight:600;}
-    nav a:hover{color:var(--primary);}
-    section{padding:4rem 2rem;max-width:1100px;margin:auto;}
-    .hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;}
-    .hero h2{font-size:2.5rem;color:var(--primary);}
-    .hero p{max-width:700px;}
-    .btn{display:inline-block;background:var(--primary);color:white;padding:.8rem 1.6rem;border-radius:6px;margin-top:1rem;text-decoration:none;font-weight:600;}
-    .btn:hover{opacity:.9;}
+    nav a{text-decoration:none;color:var(--dark);font-weight:600;transition:.2s;}
+    nav a:hover{color:var(--primary);}  
+
+    /* ----------  Hero ---------- */
+    .hero{display:flex;flex-direction:column-reverse;gap:2rem;align-items:center;text-align:center;}
+    .hero-img{width:100%;max-width:500px;border-radius:var(--radius);box-shadow:0 8px 16px rgba(0,0,0,.1);}  
+    .hero-content h2{font-size:2.5rem;}
+    .highlight{background:var(--accent);padding:.1rem .4rem;border-radius:6px;}
+
+    /* ----------  Cards Grid ---------- */
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:2rem;}
-    .card{background:white;border:1px solid #e5e8ff;border-radius:12px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.05);display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.5rem;}
-    .card img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:1rem;}
-    .pricing{background:var(--secondary);}
-    .pricing h3{margin-bottom:1rem;}
-    footer{background:#0e0e0e;color:white;padding:2rem;text-align:center;}
+    .card{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:0 4px 8px rgba(0,0,0,.04);}
+    .card img{width:110px;height:110px;border-radius:50%;object-fit:cover;margin-bottom:1rem;}
+    .card h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--primary);}  
+
+    /* ----------  Pricing ---------- */
+    .pricing{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 6px 12px rgba(0,0,0,.05);}  
+    .pricing h3{font-size:1.6rem;margin-bottom:.5rem;}
+    .pricing p{margin-bottom:1rem;}
+
+    /* ----------  FAQ ---------- */
+    details{background:#fff;border:1px solid #e5e8ff;border-radius:var(--radius);padding:1rem;margin-bottom:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.03);}  
+    summary{font-weight:600;cursor:pointer;}
+
+    /* ----------  Contact ---------- */
+    form{display:grid;gap:1rem;max-width:600px;margin:auto;}
+    input,textarea{padding:.8rem 1rem;border:1px solid #cfd2ff;border-radius:var(--radius);font-size:1rem;}
+    textarea{min-height:120px;resize:vertical;}
+
+    /* ----------  Footer ---------- */
+    footer{background:var(--dark);color:#fff;padding:2rem;text-align:center;margin-top:4rem;}
+
     @media(min-width:768px){
-      .hero{flex-direction:row;text-align:left;justify-content:space-between;}
-      .hero img{width:45%;}
-      .hero-content{max-width:50%;}
+      .hero{flex-direction:row;text-align:left;}
+      .hero-content{flex:1;}
+      .hero-img{flex:1;}
     }
   </style>
 </head>
 <body>
 
+<!-- ===== Header ===== -->
 <header>
   <h1>tokatozelders</h1>
   <nav>
     <ul>
       <li><a href="#hakkinda">Hakkında</a></li>
       <li><a href="#dersler">Dersler</a></li>
+      <li><a href="#paketler">Paketler</a></li>
       <li><a href="#ogretmenler">Öğrenciler</a></li>
-      <li><a href="#ucret">Ücretler</a></li>
+      <li><a href="#sss">S.S.S.</a></li>
       <li><a href="#iletisim">İletişim</a></li>
     </ul>
   </nav>
 </header>
 
+<!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-content">
-    <h2>Tokat'ta Öğrenciden Öğrenciye Özel Ders</h2>
-    <p>Üniversiteli ve lise son sınıf öğrencilerinden oluşan dinamik ekibimizle; ilkokuldan liseye kadar tüm derslerde <strong>tamamen öğrenci dostu</strong> bir yaklaşım sunuyoruz.</p>
-    <a href="#iletisim" class="btn">Hemen İletişime Geç</a>
+    <h2>Tokat'ta <span class="highlight">öğrenciden</span> öğrenciye özel ders</h2>
+    <p>Dinamik ekibimizle; ilkokuldan lise son sınıfa kadar tüm derslerde <strong>akran dilinde, sınav odaklı</strong> anlatım sunuyoruz.</p>
+    <a href="#iletisim" class="btn">Hemen Başvur</a>
   </div>
-  <img src="https://source.unsplash.com/600x400?study" alt="Öğrenci görseli">
+  <img src="https://source.unsplash.com/600x400?classroom" alt="Öğrenci ders" class="hero-img">
 </section>
 
-<section id="hakkinda">
-  <h2>Biz Kimiz?</h2>
-  <p>tokatozelders, Tokat içinde faaliyet gösteren ve tamamı öğrencilerden oluşan bir özel ders topluluğudur. <br>
-  Öğrencilerin güncel müfredat ve sınav sistemine hâkim olması, konuları akran diliyle anlatabilmesi en büyük avantajımız.</p>
+<!-- ===== Hakkında ===== -->
+<section id="hakkinda" class="center">
+  <h2>Bizi Farklı Kılan Nedir?</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Akran Dili</h3>
+      <p>Konu anlatımı, öğrenci bakış açısıyla anlaşılır ve keyifli.</p>
+    </div>
+    <div class="card">
+      <h3>Güncel Müfredat</h3>
+      <p>TYT‑AYT, LGS veya okul yazılıları… Hepsine %100 uyum.</p>
+    </div>
+    <div class="card">
+      <h3>Koçluk Hediyesi</h3>
+      <p>Haftada 2 ders alanlara ücretsiz koçluk: haftalık plan + motivasyon.</p>
+    </div>
+  </div>
 </section>
 
+<!-- ===== Dersler ===== -->
 <section id="dersler">
-  <h2>Dersler & Hizmetler</h2>
+  <h2 class="center">Verdiğimiz Dersler</h2>
   <div class="cards">
-    <div class="card">
-      <h3>Matematik</h3>
-      <p>Temelden TYT/AYT düzeyine kadar.</p>
+    <div class="card"><h3>Matematik</h3><p>Temelden ileri seviyeye.</p></div>
+    <div class="card"><h3>Fizik</h3><p>Görsel deney destekli.</p></div>
+    <div class="card"><h3>Kimya</h3><p>Kavram haritaları & ezber taktikleri.</p></div>
+    <div class="card"><h3>Biyoloji</h3><p>Görsellerle hafızada kalıcı.</p></div>
+    <div class="card"><h3>İngilizce</h3><p>Konuşma + sınav grameri.</p></div>
+  </div>
+</section>
+
+<!-- ===== Paketler ===== -->
+<section id="paketler" class="center">
+  <h2>Ücret Paketleri</h2>
+  <div class="cards">
+    <div class="pricing">
+      <h3>Tek Ders</h3>
+      <p>1 Saat Birebir</p>
+      <p><strong>300₺</strong></p>
+      <a href="#iletisim" class="btn">Başvur</a>
     </div>
-    <div class="card">
-      <h3>Fizik</h3>
-      <p>Görsel ve deney temelli anlatım.</p>
+    <div class="pricing" style="border:2px solid var(--primary);">
+      <h3>Haftada 2 Ders</h3>
+      <p>Koçluk Hediyeli</p>
+      <p><strong>550₺</strong></p>
+      <a href="#iletisim" class="btn">Başvur</a>
     </div>
-    <div class="card">
-      <h3>Kimya</h3>
-      <p>Kolay ezber teknikleriyle kimya artık korkulu rüya değil.</p>
-    </div>
-    <div class="card">
-      <h3>İngilizce</h3>
-      <p>Konuşma pratiği + sınav odaklı gramer.</p>
+    <div class="pricing">
+      <h3>Mini Grup (≤3)</h3>
+      <p>Kişi başı</p>
+      <p><strong>200₺</strong></p>
+      <a href="#iletisim" class="btn">Başvur</a>
     </div>
   </div>
 </section>
 
+<!-- ===== Öğretmenler ===== -->
 <section id="ogretmenler">
-  <h2>Ekipte Kimler Var?</h2>
-  <p>Aşağıdaki arkadaşlarımızdan ders alabilirsiniz. Her biri alanında başarılı, iletişimi güçlü.</p>
+  <h2 class="center">Ekip Öğrencilerimiz</h2>
+  <p class="center">Her biri alanında derece yapmış, iletişimi güçlü üniversite öğrencileri.</p>
   <div class="cards">
-    <div class="card">
-      <img src="https://source.unsplash.com/120x120?student" alt="Öğrenci 1">
-      <h3>Ayşe Y.</h3>
-      <p>Boğaziçi Üni. <br> Matematik 3. sınıf</p>
-    </div>
-    <div class="card">
-      <img src="https://source.unsplash.com/120x120?girl" alt="Öğrenci 2">
-      <h3>Mehmet T.</h3>
-      <p>İTÜ <br> Fizik Müh. 2. sınıf</p>
-    </div>
-    <div class="card">
-      <img src="https://source.unsplash.com/120x120?boy" alt="Öğrenci 3">
-      <h3>Selin K.</h3>
-      <p>Hacettepe <br> Kimya 4. sınıf</p>
-    </div>
-    <div class="card">
-      <img src="https://source.unsplash.com/120x120?face" alt="Öğrenci 4">
-      <h3>Can D.</h3>
-      <p>Bilkent <br> İngilizce Öğr. 3. sınıf</p>
-    </div>
+    <div class="card"><img src="https://source.unsplash.com/120x120?young-woman" alt="Ayşe"><h3>Ayşe Y.</h3><p>Boğaziçi Matematik 3. sınıf</p></div>
+    <div class="card"><img src="https://source.unsplash.com/120x120?student-man" alt="Mehmet"><h3>Mehmet T.</h3><p>İTÜ Fizik Müh. 2. sınıf</p></div>
+    <div class="card"><img src="https://source.unsplash.com/120x120?smile" alt="Selin"><h3>Selin K.</h3><p>Hacettepe Kimya 4. sınıf</p></div>
+    <div class="card"><img src="https://source.unsplash.com/120x120?face" alt="Can"><h3>Can D.</h3><p>Bilkent İng. Öğr. 3. sınıf</p></div>
   </div>
 </section>
 
-<section id="ucret" class="pricing">
-  <h2>Ücretler & Kampanya</h2>
-  <h3>Tek Ders (1 saat) &nbsp; — &nbsp; 300₺</h3>
-  <h3>Haftada 2 Ders (paket) &nbsp; — &nbsp; 550₺</h3>
-  <p><strong>Kampanya:</strong> Haftada 2 ders alan öğrencilerimize <em>ücretsiz koçluk</em> (hedef planlama + haftalık takip) hediyemizdir.</p>
+<!-- ===== SSS ===== -->
+<section id="sss">
+  <h2 class="center">Sık Sorulan Sorular</h2>
+  <details>
+    <summary>Dersler online mı yüz yüze mi?</summary>
+    <p>Tokat merkezde yüz yüze; şehir dışı için online seçenek sunuyoruz.</p>
+  </details>
+  <details>
+    <summary>Ödemeler nasıl yapılıyor?</summary>
+    <p>Ders sonrası nakit veya EFT kabul ediyoruz. Paketlerde haftalık peşin ödeme var.</p>
+  </details>
+  <details>
+    <summary>Koçluk hizmeti neleri kapsıyor?</summary>
+    <p>Haftalık ders çalışma planı, motivasyon takibi ve düzenli geri bildirim.</p>
+  </details>
 </section>
 
-<section id="iletisim">
-  <h2>İletişim</h2>
-  <p>Ders talebi veya soruların için bize ulaş:</p>
-  <div class="cards">
-    <div class="card">
-      <h3>WhatsApp</h3>
-      <p><a href="https://wa.me/905555555555">+90 555 555 55 55</a></p>
-    </div>
-    <div class="card">
-      <h3>E‑posta</h3>
-      <p><a href="mailto:info@tokatozelders.com">info@tokatozelders.com</a></p>
-    </div>
-  </div>
+<!-- ===== İletişim ===== -->
+<section id="iletisim" class="center">
+  <h2>Bize Ulaş</h2>
+  <p>Formu doldur veya WhatsApp'tan yaz, 24 saat içinde dönüş yapıyoruz.</p>
+  <form action="https://formspree.io/f/mnqkwxyz" method="POST">
+    <input type="text" name="name" placeholder="Adınız Soyadınız" required>
+    <input type="email" name="email" placeholder="E‑posta" required>
+    <textarea name="message" placeholder="Mesajınız" required></textarea>
+    <button type="submit" class="btn">Gönder</button>
+  </form>
+  <p style="margin-top:1rem;">veya <a href="https://wa.me/905555555555" class="btn" style="background:#25D366;">WhatsApp</a></p>
 </section>
 
+<!-- ===== Footer ===== -->
 <footer>
-  tokatozelders © 2025 — Tokat
+  tokatozelders © 2025 — Tokat | Tasarım & Kod: Batuhan + ChatGPT
 </footer>
 
 <script>
-// Nav link smooth scroll
-document.querySelectorAll('nav a').forEach(link=>{
-  link.addEventListener('click',e=>{
-    e.preventDefault();
-    document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-  });
-});
+// Smooth scroll
+ document.querySelectorAll('nav a').forEach(a=>{
+   a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+ });
 </script>
 
 </body>
 </html>
-
